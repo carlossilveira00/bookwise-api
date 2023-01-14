@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get 'member_details', to: "members#index"
 
   # Defines the root path route ("/")
   # root "articles#index"
