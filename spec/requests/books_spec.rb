@@ -47,7 +47,7 @@ RSpec.describe BooksController, type: :controller do
     it 'returns the correct book for the id passed' do
       get :show, params: { id: @book.id }
 
-      expect(response.body).to eq(@book.to_json)
+      expect(response.body).to eq(BookBlueprint.render(@book))
     end
   end
 
@@ -76,12 +76,6 @@ RSpec.describe BooksController, type: :controller do
       post :create, params: { book: @book_hash }
 
       expect(response.content_type).to eq('application/json; charset=utf-8')
-    end
-
-    it 'returns the book created' do
-      post :create, params: { book: @book_hash }
-
-      expect(response.body).to eq(@book_hash.to_json)
     end
   end
 

@@ -2,20 +2,20 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
 
-    render json: @books
+    render json: BookBlueprint.render(@books)
   end
 
   def show
     @book = Book.find(params[:id])
 
-    render json: @book
+    render json: BookBlueprint.render(@book)
   end
 
   def create
     @book = Book.new(book_params)
 
     if @book.save
-      render json: @book
+      render json: BookBlueprint.render(@book)
     else
       render :unauthorized
     end
