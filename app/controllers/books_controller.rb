@@ -17,7 +17,11 @@ class BooksController < ApplicationController
     if @book.save
       render json: BookBlueprint.render(@book)
     else
-      render :unauthorized
+      render json: {
+        message: 'Could not create book.',
+        status: :unauthorized
+      }
+
     end
   end
 
