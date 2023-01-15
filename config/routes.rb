@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get '/books', to: 'books#index'
   get '/books/:id', to: 'books#show'
+  post '/books', to: 'books#create'
 
   # Defines the root path route ("/")
   # root "articles#index"
