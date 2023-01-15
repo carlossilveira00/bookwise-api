@@ -7,7 +7,7 @@ RSpec.describe BooksController, type: :controller do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'returns body response in json.' do
+    it 'returns response in json.' do
       get :index
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end
@@ -15,6 +15,33 @@ RSpec.describe BooksController, type: :controller do
     it 'returns all the books in the DB.' do
       get :index
       expect(response.body).to eq(Book.all.to_json)
+    end
+  end
+
+  describe 'GET /show' do
+    before(:each) do
+      @book = Book.create({
+        tittle: 'Test book',
+        description: 'This book is being created to test the show request',
+        author: 'Carlos Silveira',
+        category: 'Fiction',
+        ISBN: 'KK1129KKDCQ'
+      })
+    end
+
+    it 'returns 200 status code.' do
+      get :show, params: { id: @book.id }
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'returns response in json.' do
+      get :show, params: { id: @book.id }
+      expect(response.content_type).to eq('application/json; charset=utf-8')
+    end
+
+    it 'returns the correct book for the id passed' do
+      get :show, params: { id: @book.id }
+      expect(response.body).to eq(@book.to_json)
     end
   end
 end
