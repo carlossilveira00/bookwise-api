@@ -41,12 +41,13 @@ RSpec.describe UserLibrariesController, type: :controller do
     end
   end
 
-  describe "PATCH /update_status" do
+  describe 'PATCH /update_status' do
     before(:each) do
       # Create a user and a book
       @user = User.create(email: 'test@example.com', password: 'password')
       @book = Book.create(tittle: 'Test Book', description:'Hello World.', author: 'Test Author', category: 'Fiction', ISBN:'HELLOWORLD00')
 
+      # Create a user_library instance for the user and book
       @user_book = UserLibrary.create(user_id: @user.id, book_id: @book.id)
     end
 
@@ -117,6 +118,31 @@ RSpec.describe UserLibrariesController, type: :controller do
         expect(json_response['ended_date']).to be_nil
       end
     end
-
   end
+
+  describe 'DELETE /destroy' do
+    before(:each) do
+      # Create a user and a book
+      @user = User.create(email: 'test@example.com', password: 'password')
+      @book = Book.create(tittle: 'Test Book', description:'Hello World.', author: 'Test Author', category: 'Fiction', ISBN:'HELLOWORLD00')
+
+      # Create a user_library instance for the user and book
+      @user_book = UserLibrary.create(user_id: @user.id, book_id: @book.id)
+    end
+
+    context 'Deletes the user_library instance' do
+      it 'returns a 200 status code.' do
+        delete :destroy, params: { id: @user_book.id }
+
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'returns the response in json' do
+        delete :destroy, params: { id: @user_book.id }
+
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+      end
+    end
+  end
+
 end
