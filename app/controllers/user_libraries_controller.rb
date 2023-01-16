@@ -2,6 +2,6 @@ class UserLibrariesController < ApplicationController
   def index
     @library = UserLibrary.where('user_id == ?', params[:id])
 
-    render json: @library
+    render json: UserLibraryBlueprint.render(@library)
   end
 end
