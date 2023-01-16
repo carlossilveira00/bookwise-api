@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   # Cant use the resources to generate the index route because my index action should have an user_id in the params
   # and the index route when generated with resources don't accept params.
   get 'user_library/:id', to: 'user_libraries#index'
+  post 'user_library', to: 'user_libraries#create'
 
 end

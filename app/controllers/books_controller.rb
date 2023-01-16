@@ -21,7 +21,6 @@ class BooksController < ApplicationController
         message: 'Could not create book.',
         status: :unauthorized
       }
-
     end
   end
 
