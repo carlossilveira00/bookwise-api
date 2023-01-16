@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   # and the index route when generated with resources don't accept params.
   get 'user_library/:id', to: 'user_libraries#index'
   post 'user_library', to: 'user_libraries#create'
+  patch 'user_library/:id', to: 'user_libraries#update_status'
+  delete 'user_library/:id', to: 'user_libraries#destroy'
 
 end
