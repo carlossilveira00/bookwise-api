@@ -3,11 +3,12 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'member_details', to: 'members#index'
 
   resources :books, only: [:index, :show, :create]
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # Cant use the resources to generate the index route because my index action should have an user_id in the params
+  # and the index route when generated with resources don't accept params.
+  get 'user_library/:id', to: 'user_libraries#index'
+
 end
