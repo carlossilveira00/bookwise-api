@@ -25,7 +25,7 @@ RSpec.describe UserLibrariesController, type: :controller do
     before(:each) do
       # Create a user and a book
       @user = User.create(email: 'test@example.com', password: 'password')
-      @book = Book.create(tittle: 'Test Book', description:'Hello World.', author: 'Test Author', category: 'Fiction', ISBN:'HELLOWORLD00')
+      @book = Book.create(title: 'Test Book', description:'Hello World.', author: 'Test Author', category: 'Fiction', ISBN:'HELLOWORLD00')
     end
 
     it 'returns a 200 status code.' do
@@ -45,7 +45,7 @@ RSpec.describe UserLibrariesController, type: :controller do
     before(:each) do
       # Create a user and a book
       @user = User.create(email: 'test@example.com', password: 'password')
-      @book = Book.create(tittle: 'Test Book', description:'Hello World.', author: 'Test Author', category: 'Fiction', ISBN:'HELLOWORLD00')
+      @book = Book.create(title: 'Test Book', description:'Hello World.', author: 'Test Author', category: 'Fiction', ISBN:'HELLOWORLD00')
 
       # Create a user_library instance for the user and book
       @user_book = UserLibrary.create(user_id: @user.id, book_id: @book.id)
@@ -124,7 +124,7 @@ RSpec.describe UserLibrariesController, type: :controller do
     before(:each) do
       # Create a user and a book
       @user = User.create(email: 'test@example.com', password: 'password')
-      @book = Book.create(tittle: 'Test Book', description:'Hello World.', author: 'Test Author', category: 'Fiction', ISBN:'HELLOWORLD00')
+      @book = Book.create(title: 'Test Book', description:'Hello World.', author: 'Test Author', category: 'Fiction', ISBN:'HELLOWORLD00')
 
       # Create a user_library instance for the user and book
       @user_book = UserLibrary.create(user_id: @user.id, book_id: @book.id)
