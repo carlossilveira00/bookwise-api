@@ -24,7 +24,7 @@ RSpec.describe BooksController, type: :controller do
   describe 'GET /show' do
     before(:each) do
       @book = Book.create({
-        tittle: 'Test book',
+        title: 'Test book',
         description: 'This book is being created to test the show request',
         author: 'Carlos Silveira',
         category: 'Fiction',
@@ -54,7 +54,7 @@ RSpec.describe BooksController, type: :controller do
   describe 'POST /create' do
     before(:each) do
       @book_hash = {
-        tittle: 'Test book',
+        title: 'Test book',
         description: 'This book is being created to test the show request',
         pages: 200,
         thumbnail_url: 'www.example.com/thumbnail',
