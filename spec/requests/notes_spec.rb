@@ -29,7 +29,7 @@ RSpec.describe NotesController, type: :controller do
     it 'should include the note create' do
       get :index, params: { id: @user.id }
 
-      expect(response.body).to include(@note.to_json)
+      expect(response.body).to include(NoteBlueprint.render(@note))
     end
   end
 end
