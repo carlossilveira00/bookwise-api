@@ -4,4 +4,10 @@ class NotesController < ApplicationController
 
     render json: NoteBlueprint.render(@notes)
   end
+
+  def show
+    @note = Note.find(params[:id])
+
+    render json: NoteBlueprint.render(@note)
+  end
 end
