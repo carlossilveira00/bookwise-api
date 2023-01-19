@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   delete 'user_library/:id', to: 'user_libraries#destroy'
   #Notes routes
   get 'notes/:id', to: 'notes#index'
+  get 'note/:id', to: 'notes#show'
 
 end
