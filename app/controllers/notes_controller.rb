@@ -8,6 +8,6 @@ class NotesController < ApplicationController
   def show
     @note = Note.find(params[:id])
 
-    render json: @note
+    render json: NoteBlueprint.render(@note)
   end
 end

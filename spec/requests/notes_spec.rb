@@ -61,7 +61,7 @@ RSpec.describe NotesController, type: :controller do
     it 'returns the correct note' do
       get :show, params: { id: @note.id }
 
-      expect(response.body.to_json).to eq(@note.to_json)
+      expect(response.body).to eq(NoteBlueprint.render(@note))
     end
   end
 
