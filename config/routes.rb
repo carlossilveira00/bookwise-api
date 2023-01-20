@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   #Notes routes
   get 'notes/:id', to: 'notes#index'
   get 'note/:id', to: 'notes#show'
+  post 'notes', to: 'notes#create'
 
 end
