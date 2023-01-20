@@ -65,4 +65,34 @@ RSpec.describe NotesController, type: :controller do
     end
   end
 
+  describe 'POST /create' do
+    before(:each) do
+      # Create a user and a book
+      @user = User.create(email: 'test@example.com', password: 'password')
+      @book = Book.create(title: 'Test Book', description:'Hello World.', author: 'Test Author', category: 'Fiction', ISBN:'HELLOWORLD00')
+
+      # Create a user_book
+      @user_book = UserLibrary.create(user_id: @user.id, book_id: @book.id)
+
+    end
+
+    it 'returns 200 status code.' do
+      post :create, params: { note: { user_id: @user.id, user_library_id: @user_book.id, title: 'First Note', body: 'Hello World' } }
+
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'returns response in json.' do
+      post :create, params: { note: { user_id: @user.id, user_library_id: @user_book.id, title: 'First Note', body: 'Hello World' } }
+
+      expect(response.content_type).to eq('application/json; charset=utf-8')
+    end
+
+    it 'should return the note create' do
+      post :create, params: { note: { user_id: @user.id, user_library_id: @user_book.id, title: 'First Note', body: 'Hello World' } }
+
+      expect(response.body).to eq(NoteBlueprint.render(Note.create({ user_id: @user.id, user_library_id: @user_book.id, title: 'First Note', body: 'Hello World' })))
+    end
+  end
+
 end
