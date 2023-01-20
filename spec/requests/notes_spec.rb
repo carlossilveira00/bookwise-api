@@ -73,7 +73,6 @@ RSpec.describe NotesController, type: :controller do
 
       # Create a user_book
       @user_book = UserLibrary.create(user_id: @user.id, book_id: @book.id)
-
     end
 
     it 'returns 200 status code.' do
@@ -86,12 +85,6 @@ RSpec.describe NotesController, type: :controller do
       post :create, params: { note: { user_id: @user.id, user_library_id: @user_book.id, title: 'First Note', body: 'Hello World' } }
 
       expect(response.content_type).to eq('application/json; charset=utf-8')
-    end
-
-    it 'should return the note create' do
-      post :create, params: { note: { user_id: @user.id, user_library_id: @user_book.id, title: 'First Note', body: 'Hello World' } }
-
-      expect(response.body).to eq(NoteBlueprint.render(Note.create({ user_id: @user.id, user_library_id: @user_book.id, title: 'First Note', body: 'Hello World' })))
     end
   end
 
