@@ -24,6 +24,21 @@ class NotesController < ApplicationController
     end
   end
 
+  def destroy
+    @note = Note.find(params[:id])
+
+    if @note.destroy
+      render json: {
+        message: 'This note was deleted from your library.'
+      }, status: :ok
+    else
+      render json: {
+        message: 'Could delete this note from your library.',
+        status: :unauthorized
+      }
+    end
+  end
+
   private
 
   def note_params
