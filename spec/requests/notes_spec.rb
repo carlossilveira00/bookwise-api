@@ -116,14 +116,16 @@ RSpec.describe NotesController, type: :controller do
 
       it 'Updates note title' do
         post :update, params: { id: @note.id, note: { title: 'Updated note', body: 'Hello Earth' } }
+        json_response = JSON.parse(response.body)
 
-        expect(response.body['title']).to eq('Updated Note')
+        expect(json_response['title']).to eq('Updated note')
       end
 
       it 'Updates note title' do
         post :update, params: { id: @note.id, note: { title: 'Updated note', body: 'Hello Earth' } }
+        json_response = JSON.parse(response.body)
 
-        expect(response.body['body']).to eq('Hello Earth')
+        expect(json_response['body']).to eq('Hello Earth')
       end
     end
   end
