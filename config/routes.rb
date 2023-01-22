@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   get 'notes/:id', to: 'notes#index'
   get 'note/:id', to: 'notes#show'
   post 'notes', to: 'notes#create'
+  post 'notes/:id', to: 'notes#update'
   delete 'note/:id', to: 'notes#destroy'
 end
