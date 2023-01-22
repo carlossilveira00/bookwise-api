@@ -103,25 +103,25 @@ RSpec.describe NotesController, type: :controller do
 
     context 'Deletes the note instance' do
       it 'returns a 200 status code.' do
-        post :update, params: { note: { id: @note.id, title: 'Updated note', body: 'Hello Earth' } }
+        post :update, params: { id: @note.id, note: { title: 'Updated note', body: 'Hello Earth' } }
 
         expect(response).to have_http_status(:ok)
       end
 
       it 'returns the response in json' do
-        post :update, params: { note: { id: @note.id, title: 'Updated note' } }
+        post :update, params: { id: @note.id, note: { title: 'Updated note', body: 'Hello Earth' } }
 
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
 
       it 'Updates note title' do
-        post :update, params: { note: { id: @note.id, title: 'Updated note' } }
+        post :update, params: { id: @note.id, note: { title: 'Updated note', body: 'Hello Earth' } }
 
         expect(response.body['title']).to eq('Updated Note')
       end
 
       it 'Updates note title' do
-        post :update, params: { note: { id: @note.id, title: 'Updated note' } }
+        post :update, params: { id: @note.id, note: { title: 'Updated note', body: 'Hello Earth' } }
 
         expect(response.body['body']).to eq('Hello Earth')
       end
