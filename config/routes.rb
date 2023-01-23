@@ -13,10 +13,8 @@ Rails.application.routes.draw do
   post 'user_library', to: 'user_libraries#create'
   patch 'user_library/:id', to: 'user_libraries#update_status'
   delete 'user_library/:id', to: 'user_libraries#destroy'
-  #Notes routes
+
+  # Notes routes
+  resources :notes, except: [:index]
   get 'notes/:id', to: 'notes#index'
-  get 'note/:id', to: 'notes#show'
-  post 'notes', to: 'notes#create'
-  post 'notes/:id', to: 'notes#update'
-  delete 'note/:id', to: 'notes#destroy'
 end
