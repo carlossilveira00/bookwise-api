@@ -1,4 +1,6 @@
 class NotesController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
+
   def index
     @notes = Note.where('user_id == ?', params[:id])
 

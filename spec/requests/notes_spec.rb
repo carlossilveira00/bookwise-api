@@ -76,12 +76,14 @@ RSpec.describe NotesController, type: :controller do
     end
 
     it 'returns 200 status code.' do
+      sign_in @user
       post :create, params: { note: { user_id: @user.id, user_library_id: @user_book.id, title: 'First Note', body: 'Hello World' } }
 
       expect(response).to have_http_status(:ok)
     end
 
     it 'returns response in json.' do
+      sign_in @user
       post :create, params: { note: { user_id: @user.id, user_library_id: @user_book.id, title: 'First Note', body: 'Hello World' } }
 
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -103,18 +105,21 @@ RSpec.describe NotesController, type: :controller do
 
     context 'Deletes the note instance' do
       it 'returns a 200 status code.' do
+        sign_in @user
         post :update, params: { id: @note.id, note: { title: 'Updated note', body: 'Hello Earth' } }
 
         expect(response).to have_http_status(:ok)
       end
 
       it 'returns the response in json' do
+        sign_in @user
         post :update, params: { id: @note.id, note: { title: 'Updated note', body: 'Hello Earth' } }
 
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
 
       it 'Updates note title' do
+        sign_in @user
         post :update, params: { id: @note.id, note: { title: 'Updated note', body: 'Hello Earth' } }
         json_response = JSON.parse(response.body)
 
@@ -122,6 +127,7 @@ RSpec.describe NotesController, type: :controller do
       end
 
       it 'Updates note title' do
+        sign_in @user
         post :update, params: { id: @note.id, note: { title: 'Updated note', body: 'Hello Earth' } }
         json_response = JSON.parse(response.body)
 
@@ -145,12 +151,14 @@ RSpec.describe NotesController, type: :controller do
 
     context 'Deletes the note instance' do
       it 'returns a 200 status code.' do
+        sign_in @user
         delete :destroy, params: { id: @note.id }
 
         expect(response).to have_http_status(:ok)
       end
 
       it 'returns the response in json' do
+        sign_in @user
         delete :destroy, params: { id: @note.id }
 
         expect(response.content_type).to eq('application/json; charset=utf-8')
