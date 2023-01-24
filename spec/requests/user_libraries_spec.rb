@@ -2,20 +2,27 @@ require 'rails_helper'
 
 RSpec.describe UserLibrariesController, type: :controller do
   describe 'GET /index' do
+    before(:each) do
+      # Create a user
+      @user = User.create(email: 'test@example.com', password: 'password')
+
+      sign_in @user
+    end
+
     it 'returns 200 status code.' do
-      get :index, params: { id: 1 }
+      get :index, params: { id: @user.id }
 
       expect(response).to have_http_status(:ok)
     end
 
     it 'returns response in json.' do
-      get :index, params: { id: 1 }
+      get :index, params: { id: @user.id }
 
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end
 
     it 'returns the whole library for a specific user.' do
-      get :index, params: { id: 1 }
+      get :index, params: { id: @user.id }
 
       expect(response.body).to eq(UserLibrary.where('user_id == ?', 1).to_json)
     end
@@ -26,6 +33,8 @@ RSpec.describe UserLibrariesController, type: :controller do
       # Create a user and a book
       @user = User.create(email: 'test@example.com', password: 'password')
       @book = Book.create(title: 'Test Book', description:'Hello World.', author: 'Test Author', category: 'Fiction', ISBN:'HELLOWORLD00')
+
+      sign_in @user
     end
 
     it 'returns a 200 status code.' do
@@ -128,6 +137,8 @@ RSpec.describe UserLibrariesController, type: :controller do
 
       # Create a user_library instance for the user and book
       @user_book = UserLibrary.create(user_id: @user.id, book_id: @book.id)
+
+      sign_in @user
     end
 
     context 'Deletes the user_library instance' do
