@@ -64,6 +64,9 @@ RSpec.describe BooksController, type: :controller do
         category: 'Fiction',
         ISBN: 'KK1129KKDCQD'
       }
+      @user = User.create(email: 'test@example.com', password: 'password')
+
+      sign_in @user
     end
 
     it 'returns a 200 status code.' do
