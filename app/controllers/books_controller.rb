@@ -17,10 +17,13 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
 
     if @book.save
-      render json: BookBlueprint.render(@book)
+      render json: {
+        message: 'Book successfully created!',
+        status: :ok
+      }
     else
       render json: {
-        message: 'Could not create book.',
+        message: 'Could not create this book.',
         status: :unauthorized
       }
     end
