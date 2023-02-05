@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :auth_user, only: [:create]
 
   def index
     @books = Book.all
@@ -30,5 +30,10 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :description, :pages, :author, :category, :thumbnail_url, :publisher, :ISBN, :published_date)
+  end
+
+  def auth_user
+    jwt_payload = JWT.decode(request.headers['Authorization'].split(' ')[1], Rails.application.credentials.fetch(:secret_key_base)).first
+    User.find(jwt_payload['sub'])
   end
 end
