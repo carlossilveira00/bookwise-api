@@ -10,7 +10,7 @@ categories.each do |category|
   books = JSON.parse(books_serialized)
 
   books['items'].each do |book|
-    unless book['volumeInfo']['industryIdentifiers'].nil?
+    unless book['volumeInfo'].nil? || book['volumeInfo']['industryIdentifiers'].nil? || book['volumeInfo']['authors'].nil? || book['volumeInfo']['categories'].nil? || book['volumeInfo']['description'].nil? || book['volumeInfo']['imageLinks'].nil? || !Book.where("ISBN == ?", book['volumeInfo']['industryIdentifiers'][0]['identifier']).nil?
       Book.create!({
         title: book['volumeInfo']['title'],
         description: book['volumeInfo']['description'],
