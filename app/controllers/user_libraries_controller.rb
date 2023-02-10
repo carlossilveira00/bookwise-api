@@ -1,5 +1,6 @@
 class UserLibrariesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :auth_user, only: [:create, :update, :destroy]
+
   def index
     @library = UserLibrary.where('user_id == ?', params[:id])
 
@@ -8,6 +9,8 @@ class UserLibrariesController < ApplicationController
 
   def create
     @user_book = UserLibrary.new(user_library_params)
+    @user_book.status = 'Wishlist'
+    @user_book.started_date = Time.now
 
     if @user_book.save
       render json: UserLibraryBlueprint.render(@user_book)
@@ -63,9 +66,13 @@ class UserLibrariesController < ApplicationController
   end
 
   private
+  def auth_user
+    jwt_payload = JWT.decode(request.headers['Authorization'].split(' ')[1], Rails.application.credentials.fetch(:secret_key_base)).first
+    User.find(jwt_payload['sub'])
+  end
 
   def user_library_params
-    params.require(:book_association).permit(:book_id, :user_id, :status, :start_date, :end_date)
+    params.require(:book_association).permit(:book_id, :user_id)
   end
 
   def started_book(user_book)
