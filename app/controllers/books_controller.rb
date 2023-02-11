@@ -1,8 +1,10 @@
 class BooksController < ApplicationController
+  include Pagy::Backend
   before_action :auth_user, only: [:create]
 
   def index
-    @books = Book.all
+    # @books = Book.all
+    @pagy, @books = pagy(Book.all)
 
     render json: BookBlueprint.render(@books)
   end

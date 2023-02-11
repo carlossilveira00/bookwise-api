@@ -10,8 +10,9 @@ categories.each do |category|
   books = JSON.parse(books_serialized)
 
   books['items'].each do |book|
-    unless book['volumeInfo'].nil? || book['volumeInfo']['industryIdentifiers'].nil? || book['volumeInfo']['authors'].nil? || book['volumeInfo']['categories'].nil? || book['volumeInfo']['description'].nil? || book['volumeInfo']['imageLinks'].nil? || !Book.where("ISBN == ?", book['volumeInfo']['industryIdentifiers'][0]['identifier']).nil?
-      Book.create!({
+    if (!book['volumeInfo'].nil? && !book['volumeInfo']['industryIdentifiers'].nil? && !book['volumeInfo']['authors'].nil? && !book['volumeInfo']['categories'].nil? && !book['volumeInfo']['description'].nil? && !book['volumeInfo']['imageLinks'].nil? && !Book.where("ISBN == ?", book['volumeInfo']['industryIdentifiers'][0]['identifier']).nil?)
+      puts "*******************"
+      Book.create({
         title: book['volumeInfo']['title'],
         description: book['volumeInfo']['description'],
         pages: book['volumeInfo']['pageCount'],
@@ -23,6 +24,9 @@ categories.each do |category|
         published_date: book['volumeInfo']['publishedDate'],
         rating: book['volumeInfo']['averageRating']
       })
+      puts "Book Created!"
+    else
+      puts 'Book Not Created'
     end
   end
   puts "Completed category: #{category}"
