@@ -7,6 +7,12 @@ class NotesController < ApplicationController
     render json: NoteBlueprint.render(@notes)
   end
 
+  def book_notes
+    @notes = Note.where('user_library_id == ?', params[:user_book_id])
+
+    render json: NoteBlueprint.render(@notes)
+  end
+
   def show
     @note = Note.find(params[:id])
 
