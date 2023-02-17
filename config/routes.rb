@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   # Notes routes
   resources :notes, except: [:index, :book_notes]
   get 'notes/:id', to: 'notes#index'
-  get 'book_notes/:id', to: 'notes#book_notes'
+  get 'book_notes/:user_book_id', to: 'notes#book_notes'
 end

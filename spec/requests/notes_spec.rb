@@ -182,13 +182,13 @@ RSpec.describe NotesController, type: :controller do
 
     context 'Retrieves all the notes for a specific book from a specific user.' do
       it 'returns a 200 status code.' do
-        get :book_notes, params: { id: @user_book.id }
+        get :book_notes, params: { user_book_id: @user_book.id }
 
         expect(response).to have_http_status(:ok)
       end
 
       it 'returns the response in json' do
-        get :book_notes, params: { id: @user_book.id }
+        get :book_notes, params: { user_book_id: @user_book.id }
 
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
