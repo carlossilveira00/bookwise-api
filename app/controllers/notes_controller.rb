@@ -1,5 +1,4 @@
 class NotesController < ApplicationController
-
   def index
     @notes = Note.where('user_id == ?', params[:id])
 
@@ -19,7 +18,7 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = Note.new({ user_library_id: params[:user_book], user_id: params[:user_id] })
+    @note = Note.new({ user_library_id: params[:user_book_id], user_id: params[:user_id] })
     @note.title = 'Enter your notes here.'
     @note.body = 'What are your thoughts on this book?'
 
