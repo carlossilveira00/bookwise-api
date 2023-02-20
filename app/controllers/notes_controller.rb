@@ -1,5 +1,4 @@
 class NotesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   def index
     @notes = Note.where('user_id == ?', params[:id])
@@ -20,7 +19,9 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = Note.new(note_params)
+    @note = Note.new({ user_library_id: params[:user_book], user_id: params[:user_id] })
+    @note.title = 'Enter your notes here.'
+    @note.body = 'What are your thoughts on this book?'
 
     if @note.save
       render json: NoteBlueprint.render(@note)
